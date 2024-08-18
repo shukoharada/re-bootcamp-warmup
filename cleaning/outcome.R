@@ -55,9 +55,6 @@ outcome_data_5 <- outcome_data_4 %>%
 outcome_data_5 <- outcome_data_5 %>%
   mutate(unitid = as.double(unitid))
 
-covariates_5 <- covariates_5 %>%
-  mutate(unitid = as.double(unitid))
-
 outcome_6 <- semi_join(outcome_data_5, covariates_5, by = "unitid")
 
 

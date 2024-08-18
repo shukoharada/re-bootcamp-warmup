@@ -21,9 +21,10 @@ covariates_4 <- covariates_3 %>%
 covariates_5 <- covariates_4 %>%
   filter(year >= 1991 & year <= 2010)
 
+covariates_5 <- covariates_5 %>%
+  mutate(unitid = as.double(unitid))
+
 # outcome_data_5 と covariates_5 に共通する unitid だけを持つ covariates_6のデータセットを作成
 covariates_6 <- semi_join(covariates_5, outcome_6, by = "unitid")
 
-covariates_7 <- semi_join(covariates_6, semester_8, by = "unitid")
-
-covariates_8 <- covariates_7 %>% filter(duplicated(unitid))
+covariates_7 <- covariates_6 %>% filter(duplicated(unitid))
