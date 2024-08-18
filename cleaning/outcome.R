@@ -19,7 +19,7 @@ outcome_data<- bind_rows(data_list)
 outcome_data_2 <- outcome_data %>%
   mutate(scale_womengradrate4yr = women_gradrate_4yr * 0.01)
 
-#各列のデータの方を確認する
+#各列のデータの形式を確認する
 str(outcome_data_2$m_4yrgrads)
 str(outcome_data_2$m_cohortsize)
 str(outcome_data_2$totcohortsize)
@@ -50,3 +50,15 @@ outcome_data_4 <-outcome_data_4 %>%
 #1991~2010までのデータセットにする
 outcome_data_5 <- outcome_data_4 %>%
   filter(year >= 1991 & year <= 2010)
+
+# outcome_data_5 と covariates_5 に共通する unitid だけを持つ outcome_data_6のデータセットを作成
+outcome_data_5 <- outcome_data_5 %>%
+  mutate(unitid = as.double(unitid))
+
+covariates_5 <- covariates_5 %>%
+  mutate(unitid = as.double(unitid))
+
+outcome_6 <- semi_join(outcome_data_5, covariates_5, by = "unitid")
+
+
+
